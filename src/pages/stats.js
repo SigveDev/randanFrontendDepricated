@@ -58,7 +58,7 @@ const Stats = ({ user }) => {
                 </div>
             </div> :
             <div>
-                {!stats && chapters || stats && !chapters ? <p>Loading...</p> : <p>No chapters yet!</p>}
+                {(!stats && chapters) || (stats && !chapters) ? <p>Loading...</p> : <p>No chapters yet!</p>}
             </div>}
         </div>
     );
