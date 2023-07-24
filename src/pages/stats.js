@@ -42,7 +42,7 @@ const Stats = ({ user }) => {
     return (
         <div className="stats">
             <h2>Analytics</h2>
-            {chapters && stats && views && <div className="stats-content">
+            {chapters && stats && views ? <div className="stats-content">
                 <div className="overall">
                     <ion-icon name="eye-sharp"></ion-icon>
                     <p>{views}</p>
@@ -56,6 +56,9 @@ const Stats = ({ user }) => {
                         </div>
                     ))}
                 </div>
+            </div> :
+            <div>
+                {!stats && chapters || stats && !chapters ? <p>Loading...</p> : <p>No chapters yet!</p>}
             </div>}
         </div>
     );

@@ -55,11 +55,15 @@ const Admin = ({ user }) => {
                 return (
                     <div className="admin-content">
                         <h2>My Chapters</h2>
-                        <div className="chapters">
+                        {chapters.length > 0 ? <div className="chapters">
                             {chapters.slice(0).reverse().map((chapter, i) => (
                                 <ChapterSmallAd chapter={chapter} key={i} />
                             ))}
-                        </div>
+                        </div> :
+                        <div className="no-chapters">
+                            <h3>You have no chapters yet...</h3>
+                            <a href="/admin?page=new">Create one now!</a>
+                        </div>}
                     </div>
                 );
             case "new":

@@ -1,17 +1,17 @@
 :root {
-  --main-color: #1f7d84;
-  --main-color-accent: #24959d;
-  --secondary-color: #050b2a;
-  --third-color: #02071d;
-  --forth-color: #040922;
-  --scrollbar-color: #0d1b59;
-  --text-color: #f5f5f5;
-  --text-color-dark: #4e45d4;
-  --input-background: #050d31;
-  --contrast-color: #bd0707;
-  --contrast-color-accent: #ac0606;
+  --main-color: #1f7d84; /*Logo og "eye-catching" farger*/
+  --main-color-accent: #24959d; /*accent farge for bruk på hover osv*/
+  --secondary-color: #050b2a; /*Background farge 1 (Mest brukt)*/
+  --third-color: #02071d; /*Background farge 2 (brukt på header osv)*/
+  --forth-color: #040922; /*Background farge 3 (brukt på bakgrunnen hvor både 1 og 2 er brukt)*/
+  --scrollbar-color: #0d1b59; /*Ganske selvforklarende, scrollbar handle*/
+  --text-color: #f5f5f5; /*Main text farge*/
+  --text-color-dark: #4e45d4; /*Secondary text farge*/
+  --input-background: #050d31; /*Bakgrunnsfargen brukt på input felt som på login*/
+  --contrast-color: #bd0707; /*Delete og logout knapp*/
+  --contrast-color-accent: #ac0606; /*Hover på steder hvor contrast er brukt*/
 
-  --overlay-color: #000000a1;
+  --overlay-color: #000000a1; /*Hvor mye overlay skal gjøre noe mørkere*/
 }
 
 .App {
@@ -787,6 +787,33 @@
   grid-template-columns: 24.5% 24.5% 24.5% 24.5%;
   grid-column-gap: 1%;
   grid-row-gap: 1%;
+}
+.admin .admin-view .admin-content .no-chapters {
+  width: 95%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.admin .admin-view .admin-content .no-chapters a {
+  width: 30%;
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 1.2em;
+  cursor: pointer;
+  border: none;
+  margin-top: auto;
+  margin-bottom: 0;
+  background-color: var(--main-color);
+  border-radius: 10px;
+}
+.admin .admin-view .admin-content .no-chapters a:hover {
+  background-color: var(--main-color-accent);
 }
 
 /*Edit Page*/
