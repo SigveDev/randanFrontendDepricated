@@ -20,11 +20,11 @@ const Page = ({ chapters, likes, user }) => {
     useEffect(() => {
         const changeReading = async () => {
             console.log(user._id);
-            await axios.post("https://node.binders.net:8123/liked/reading/" + user._id, {
+            await axios.post("http://node.binders.net:8123/liked/reading/" + user._id, {
                 id: id,
                 title: page.title,
             });
-            const res = await axios.get('https://node.binders.net:8123/liked/likes/' + user._id, {}, { withCredentials: true });
+            const res = await axios.get('http://node.binders.net:8123/liked/likes/' + user._id, {}, { withCredentials: true });
             localStorage.setItem('likes', JSON.stringify(res.data));
         }
         if(likes !== null && user !== null && user !== "error") {
@@ -106,7 +106,7 @@ const Page = ({ chapters, likes, user }) => {
         const changeReading = async () => {
             if(parseInt(number) === page.pages.length) {
                 console.log("change reading");
-                const res = await axios.post("https://node.binders.net:8123/liked/history/" + id, {
+                const res = await axios.post("http://node.binders.net:8123/liked/history/" + id, {
                     userId: user._id,
                 }, { withCredentials: true });
                 if(res.status === 200) {
@@ -126,9 +126,9 @@ const Page = ({ chapters, likes, user }) => {
                 {page &&
                 <div className="page-content">
                     {number > 0 ?
-                        <img src={`https://node.binders.net:8123/uploads/${page.pages[number - 1].image}`} id="pageImage" alt={"page " + number} onClick={ChangeFullPage} />
+                        <img src={`http://node.binders.net:8123/uploads/${page.pages[number - 1].image}`} id="pageImage" alt={"page " + number} onClick={ChangeFullPage} />
                         :  
-                        <img src={`https://node.binders.net:8123/uploads/${page.image}`} id="pageImage" alt={"page " + number} onClick={ChangeFullPage} />
+                        <img src={`http://node.binders.net:8123/uploads/${page.image}`} id="pageImage" alt={"page " + number} onClick={ChangeFullPage} />
                     }
                 </div>
                 }
@@ -149,9 +149,9 @@ const Page = ({ chapters, likes, user }) => {
                     {page &&
                         <div className="fullpage-content">
                             {number > 0 ?
-                                <img src={`https://node.binders.net:8123/uploads/${page.pages[number - 1].image}`} alt={"page " + number} onClick={ChangeFullPage} />
+                                <img src={`http://node.binders.net:8123/uploads/${page.pages[number - 1].image}`} alt={"page " + number} onClick={ChangeFullPage} />
                                 :  
-                                <img src={`https://node.binders.net:8123/uploads/${page.image}`} alt={"page " + number} onClick={ChangeFullPage} />
+                                <img src={`http://node.binders.net:8123/uploads/${page.image}`} alt={"page " + number} onClick={ChangeFullPage} />
                             }
                         </div>
                     }
