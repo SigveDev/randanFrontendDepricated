@@ -12,7 +12,7 @@ const Admin = ({ user }) => {
     useEffect(() => {
         const getChapters = async () => {
             try {
-                const res = await axios.get("http://localhost:5000/chapter/findmine/" + user._id);
+                const res = await axios.get("https://node.binders.net:8123/chapter/findmine/" + user._id);
                 setChapters(res.data);
             } catch (err) {
                 console.log(err);
@@ -90,6 +90,12 @@ const Admin = ({ user }) => {
     useEffect(() => {
         if(user === "error") {
             window.location.replace("/login");
+        } else if (user !== "error"){
+            if(user !== null) {
+                if(user.isAdmin === false) {
+                    window.location.replace("/");
+                }
+            }
         }
     }, [user]);
 

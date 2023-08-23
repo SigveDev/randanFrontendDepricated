@@ -447,6 +447,28 @@
   object-fit: cover;
   margin: 1em 0;
 }
+.chapter .chapter-content .right button {
+  width: 20%;
+  height: 5dvh;
+  border-radius: 10px;
+  border: none;
+  padding: 0 2%;
+  margin: 0.6em 0;
+  background-color: var(--third-color);
+  color: var(--text-color);
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--main-color);
+}
+.chapter .chapter-content .right button.active {
+  background-color: var(--main-color);
+  color: var(--text-color);
+}
+.chapter .chapter-content .right button ion-icon {
+  font-size: 1.8em;
+  margin: auto;
+}
 .chapter .pages {
   width: 100%;
   height: fit-content;
@@ -1103,4 +1125,189 @@
   margin-left: 5px;
   font-size: 2rem;
   color: var(--main-color);
+}
+
+/*Register Page*/
+.register {
+  width: calc(100dvw - 2dvw);
+  height: 90dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--third-color);
+  color: var(--text-color);
+  padding: 0 1dvw;
+}
+.register .register-form {
+  width: 60%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.register .register-form h2 {
+  font-size: 2rem;
+  margin: 0 0 1em 0;
+}
+.register .register-form input {
+  width: 60%;
+  height: 7dvh;
+  border-radius: 10px;
+  border: none;
+  padding: 0 2%;
+  margin: 0.6em 0;
+  background-color: var(--input-background);
+  color: var(--text-color);
+  font-size: 1.1em;
+}
+.register .register-form input:focus {
+  outline: 2px solid var(--main-color);
+}
+.register .register-form button {
+  width: 50%;
+  height: 7dvh;
+  border-radius: 10px;
+  border: none;
+  padding: 0 2%;
+  margin: 0.6em 0;
+  background-color: var(--main-color);
+  color: var(--text-color);
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+}
+.register .register-form button:focus {
+  outline: 2px solid var(--main-color);
+}
+.register .register-form button:hover {
+  background-color: var(--main-color-accent);
+}
+
+/*User Page*/
+.user {
+  width: calc(100dvw - 2dvw);
+  min-height: 90dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: var(--third-color);
+  color: var(--text-color);
+  padding: 0 1dvw;
+}
+.user .user-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.user .user-content .current {
+  width: 25%;
+  height: fit-content;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.user .user-content .current .user-info {
+  width: 100%;
+  margin-top: 50px;
+  height: fit-content;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.user .user-content .current .user-info .user-settings {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: var(--text-color-dark)
+}
+.user .user-content .current .user-info p {
+  margin: 0;
+  margin-bottom: 10px;
+}
+.user .user-content .current .user-info .logout {
+  width: 100%;
+  height: 5dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--input-background);
+  border-radius: 10px;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+}
+.user .user-content .current .user-info .logout:hover {
+  background-color: var(--contrast-color);
+}
+.user .user-content .other {
+  width: 75%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.user .user-content .other .selector {
+  width: 60%;
+  height: 8dvh;
+  display: flex;
+  align-items: center;
+  background-color: var(--secondary-color);
+  border-radius: 40px;
+  border: 2px solid var(--main-color);
+  color: var(--text-color);
+  margin-top: 20px;
+}
+.user .user-content .other .selector .liked {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 40px;
+  border: none;
+  background-color: var(--main-color);
+  color: var(--text-color);
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: auto;
+}
+.user .user-content .other .selector .history {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 40px;
+  border: none;
+  background-color: var(--main-color);
+  color: var(--text-color);
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: auto;
+}
+.user .user-content .other .content {
+  width: 90%;
+  min-height: 70dvh;
+}
+.user .user-content .other .content .liked-content, .user .user-content .other .content .history-content {
+  width: calc(100% - 20px);
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(auto-fill, 1fr);
+  grid-gap: 10px;
+  padding: 10px;
+  overflow-y: scroll;
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 
-const Page = ({ chapters }) => {
+const Page = ({ chapters, likes, user }) => {
     const [page, setPage] = useState(null);
     const [fullpage, setFullpage] = useState(false);
 
@@ -15,6 +16,27 @@ const Page = ({ chapters }) => {
         }
         getPage();
     }, [chapters, id]);
+
+    useEffect(() => {
+        const changeReading = async () => {
+            console.log(user._id);
+            await axios.post("https://node.binders.net:8123/liked/reading/" + user._id, {
+                id: id,
+                title: page.title,
+            });
+            const res = await axios.get('https://node.binders.net:8123/liked/likes/' + user._id, {}, { withCredentials: true });
+            localStorage.setItem('likes', JSON.stringify(res.data));
+        }
+        if(likes !== null && user !== null && user !== "error") {
+            if(likes.reading.length === 0) {
+                changeReading();
+            } else {
+                if(likes.reading[0].id !== id) {
+                    changeReading();
+                }
+            }
+        }
+    }, [likes, id, user, page]);
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
@@ -80,6 +102,23 @@ const Page = ({ chapters }) => {
         };
     }, []);
 
+    useEffect(() => {
+        const changeReading = async () => {
+            if(parseInt(number) === page.pages.length) {
+                console.log("change reading");
+                const res = await axios.post("https://node.binders.net:8123/liked/history/" + id, {
+                    userId: user._id,
+                }, { withCredentials: true });
+                if(res.status === 200) {
+                    localStorage.setItem('likes', JSON.stringify(res.data));
+                }
+            }
+        }
+        if(user !== null && user !== "error" && page && id && number) {
+            changeReading();
+        }
+    }, [number, page, id, user]);
+
     return (
         <div className="page">
             <div className="page-viewer">
@@ -87,13 +126,13 @@ const Page = ({ chapters }) => {
                 {page &&
                 <div className="page-content">
                     {number > 0 ?
-                        <img src={`http://localhost:5000/uploads/${page.pages[number - 1].image}`} id="pageImage" alt={"page " + number} onClick={ChangeFullPage} />
+                        <img src={`https://node.binders.net:8123/uploads/${page.pages[number - 1].image}`} id="pageImage" alt={"page " + number} onClick={ChangeFullPage} />
                         :  
-                        <img src={`http://localhost:5000/uploads/${page.image}`} id="pageImage" alt={"page " + number} onClick={ChangeFullPage} />
+                        <img src={`https://node.binders.net:8123/uploads/${page.image}`} id="pageImage" alt={"page " + number} onClick={ChangeFullPage} />
                     }
                 </div>
                 }
-                {page && <div className="page-ui-bottom">Page {parseInt(number)}</div> }
+                {page && <div className="page-ui-bottom">Page {parseInt(number)}</div>}
                 {page && 
                     <div className="page-ui-left">
                         {number > 0 && <a className="left-link" href={`http://localhost:3000/page/${id}/${parseInt(number) - 1}?full=false`}><ion-icon name="chevron-back-sharp"></ion-icon></a>}
@@ -101,7 +140,7 @@ const Page = ({ chapters }) => {
                 }
                 {page &&
                     <div className="page-ui-right">
-                        {number < page.pages.length - 1 && <a className="right-link" href={`http://localhost:3000/page/${id}/${parseInt(number) + 1}?full=false`}><ion-icon name="chevron-forward-sharp"></ion-icon></a>}
+                        {number < page.pages.length && <a className="right-link" href={`http://localhost:3000/page/${id}/${parseInt(number) + 1}?full=false`}><ion-icon name="chevron-forward-sharp"></ion-icon></a>}
                     </div>
                 }
             </div>
@@ -110,9 +149,9 @@ const Page = ({ chapters }) => {
                     {page &&
                         <div className="fullpage-content">
                             {number > 0 ?
-                                <img src={`http://localhost:5000/uploads/${page.pages[number - 1].image}`} alt={"page " + number} onClick={ChangeFullPage} />
+                                <img src={`https://node.binders.net:8123/uploads/${page.pages[number - 1].image}`} alt={"page " + number} onClick={ChangeFullPage} />
                                 :  
-                                <img src={`http://localhost:5000/uploads/${page.image}`} alt={"page " + number} onClick={ChangeFullPage} />
+                                <img src={`https://node.binders.net:8123/uploads/${page.image}`} alt={"page " + number} onClick={ChangeFullPage} />
                             }
                         </div>
                     }
@@ -123,7 +162,7 @@ const Page = ({ chapters }) => {
                     }
                     {page &&
                         <div className="fullpage-ui-right">
-                            {number < page.pages.length - 1 && <a className="right-link-full" href={`http://localhost:3000/page/${id}/${parseInt(number) + 1}?full=true`}><ion-icon name="chevron-forward-sharp"></ion-icon></a>}
+                            {number < page.pages.length && <a className="right-link-full" href={`http://localhost:3000/page/${id}/${parseInt(number) + 1}?full=true`}><ion-icon name="chevron-forward-sharp"></ion-icon></a>}
                         </div>
                     }
                 </div>

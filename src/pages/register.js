@@ -1,15 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const Login = ({ user }) => {
+const Register = ({ user }) => {
     const [status, setStatus] = useState(true);
 
-    const login = async (e) => {
+    const register = async (e) => {
         e.preventDefault();
         try {
             const username = document.getElementById('usern').value;
             const password = document.getElementById('pass').value;
-            const response = await axios.post('https://node.binders.net:8123/user/login', {}, {
+            const response = await axios.post('https://node.binders.net:8123/user/register', {}, {
                 withCredentials: true,
                 headers: {
                     username: username,
@@ -21,40 +21,33 @@ const Login = ({ user }) => {
                 localStorage.setItem('user', JSON.stringify(response.data.accessToken));
                 let now = new Date();
                 localStorage.setItem('ttl', JSON.stringify(now.getTime() + (86400000 * 7)));
-                if(response.data.user.isAdmin === true) {
-                    window.location.replace('/admin');
-                } else {
-                    window.location.replace('/user');
-                }
+                //window.location.replace('http://localhost:3000/');
             }
         } catch (err) {
             console.log(err);
             setStatus(false);
         }
-    };
+    }
 
     useEffect(() => {
-        if(user !== null) {
-            if(user.isAdmin === false) {
-                window.location.replace('/user');
-            } else if (user.isAdmin === true) {
-                window.location.replace('/admin');
-            }
+        console.log(user);
+        if(user !== null && user !== "error") {
+            window.location.replace('/');
         }
     }, [user]);
 
     return (
-        <div className="login">
-            <form className="login-form" onSubmit={login}>
-                <h2>Login</h2>
+        <div className="register">
+            <form className="register-form" onSubmit={register}>
+                <h2>Register</h2>
                 <input type="text" id="usern" placeholder="username" />
                 <input type="password" id="pass" placeholder="password" />
-                {status === false && <p className="error">Feil brukernavn eller passord</p>}
-                <a href="/register">New user?</a>
-                <button type="submit">Login</button>
+                {status === false && <p className="error">Username already in use</p>}
+                <a href="/login">Already have an account?</a>
+                <button type="submit">Register</button>
             </form>
         </div>
     );
 }
 
-export default Login;
+export default Register;

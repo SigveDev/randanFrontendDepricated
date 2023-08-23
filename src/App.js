@@ -9,17 +9,21 @@ import Home from './pages/home';
 import Chapter from './pages/chapter';
 import Page from './pages/page';
 
+import Register from './pages/register';
+
 import Admin from './pages/admin';
 import Login from './pages/login';
+import User from './pages/user';
 
 function App() {
   const [chapters, setChapters] = useState([]);
   const [user, setUser] = useState(null);
+  const [likes, setLikes] = useState(null);
 
   useEffect(() => {
     const getChapters = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/chapter/findall');
+        const res = await axios.get('https://node.binders.net:8123/chapter/findall');
         setChapters(res.data);
         if(chapters.length === 0) {
           localStorage.setItem('chapters', JSON.stringify(res.data));
@@ -31,7 +35,7 @@ function App() {
     if(!localStorage.getItem('chapters')) {
       getChapters();
     } else {
-      if(window.location.pathname === '/') {
+      if(window.location.pathname === '/' || window.location.pathname === '/user' || window.location.pathname === '/admin') {
         getChapters();
       }
       setChapters(JSON.parse(localStorage.getItem('chapters')));
@@ -40,7 +44,7 @@ function App() {
 
   useEffect(() => {
     const checkUser = async () => {
-      const response = await axios.get('http://localhost:5000/auth', {
+      const response = await axios.get('https://node.binders.net:8123/auth', {
         headers: {
           Authorization: JSON.parse(localStorage.getItem('user'))
         }
@@ -63,17 +67,41 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    const getLikes = async () => {
+      try {
+        const res = await axios.get('https://node.binders.net:8123/liked/likes/' + user._id, {}, { withCredentials: true });
+        setLikes(res.data);
+        localStorage.setItem('likes', JSON.stringify(res.data));
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    if(window.location.pathname === '/' || window.location.pathname === '/user') {
+      if(user !== null && user !== "error") {
+        getLikes();
+      }
+    } else {
+      if(user !== null && user !== "error") {
+        setLikes(JSON.parse(localStorage.getItem('likes')));
+      }
+    }
+  }, [user]);
+
   return (
     <BrowserRouter>
       <div className="App">
         <Header user={user} />
         <Routes>
           <Route path="/" element={<Home chapters={chapters} />} />
-          <Route path="/chapter/:id" element={<Chapter chapters={chapters} />} />
-          <Route path="/page/:id/:number" element={<Page chapters={chapters} />} />
+          <Route path="/chapter/:id" element={<Chapter chapters={chapters} user={user} />} />
+          <Route path="/page/:id/:number" element={<Page chapters={chapters} likes={likes} user={user} />} />
+
+          <Route path="/register" element={<Register user={user} />} />
 
           <Route path="/admin?" element={<Admin user={user} />} />
           <Route path="/login" element={<Login user={user} />} />
+          <Route path="/user" element={<User user={user} chapters={chapters} likes={likes} />} />
         </Routes>
       </div>
     </BrowserRouter>

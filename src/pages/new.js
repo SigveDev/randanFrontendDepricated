@@ -41,7 +41,7 @@ const New = ({ user }) => {
                 const data = new FormData();
                 data.append("image", files[i]);
                 const res = await axios.post(
-                    "http://localhost:5000/upload",
+                    "https://node.binders.net:8123/upload",
                     data
                 );
                 tempPages.push({
@@ -62,12 +62,12 @@ const New = ({ user }) => {
         const data = new FormData();
         data.append("image", file);
         const res = await axios.post(
-            "http://localhost:5000/upload",
+            "https://node.binders.net:8123/upload",
             data
         );
         newChapter.image = res.data.file;
         try {
-            await axios.post("http://localhost:5000/chapter/new", newChapter);
+            await axios.post("https://node.binders.net:8123/chapter/new", newChapter);
             window.location.replace("/admin?page=my");
         }
         catch (err) {
