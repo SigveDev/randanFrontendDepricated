@@ -122,7 +122,7 @@ const Page = ({ chapters, likes, user }) => {
     return (
         <div className="page">
             <div className="page-viewer">
-                {page && <div className="page-ui"><a href={`http://localhost:3000/chapter/${page._id}`}><ion-icon name="chevron-back-sharp"></ion-icon>Back</a></div>}
+                {page && <div className="page-ui"><a href={`/chapter/${page._id}`}><ion-icon name="chevron-back-sharp"></ion-icon>Back</a></div>}
                 {page &&
                 <div className="page-content">
                     {number > 0 ?
@@ -135,12 +135,12 @@ const Page = ({ chapters, likes, user }) => {
                 {page && <div className="page-ui-bottom">Page {parseInt(number)}</div>}
                 {page && 
                     <div className="page-ui-left">
-                        {number > 0 && <a className="left-link" href={`http://localhost:3000/page/${id}/${parseInt(number) - 1}?full=false`}><ion-icon name="chevron-back-sharp"></ion-icon></a>}
+                        {number > 0 && <a className="left-link" href={`/page/${id}/${parseInt(number) - 1}?full=false`}><ion-icon name="chevron-back-sharp"></ion-icon></a>}
                     </div>
                 }
                 {page &&
                     <div className="page-ui-right">
-                        {number < page.pages.length && <a className="right-link" href={`http://localhost:3000/page/${id}/${parseInt(number) + 1}?full=false`}><ion-icon name="chevron-forward-sharp"></ion-icon></a>}
+                        {number < page.pages.length && <a className="right-link" href={`/page/${id}/${parseInt(number) + 1}?full=false`}><ion-icon name="chevron-forward-sharp"></ion-icon></a>}
                     </div>
                 }
             </div>
@@ -157,12 +157,12 @@ const Page = ({ chapters, likes, user }) => {
                     }
                     {page && 
                         <div className="fullpage-ui-left">
-                            {number > 0 && <a className="left-link-full" href={`http://localhost:3000/page/${id}/${parseInt(number) - 1}?full=true`}><ion-icon name="chevron-back-sharp"></ion-icon></a>}
+                            {number > 0 && <a className="left-link-full" href={`/page/${id}/${parseInt(number) - 1}?full=true`}><ion-icon name="chevron-back-sharp"></ion-icon></a>}
                         </div>
                     }
                     {page &&
                         <div className="fullpage-ui-right">
-                            {number < page.pages.length && <a className="right-link-full" href={`http://localhost:3000/page/${id}/${parseInt(number) + 1}?full=true`}><ion-icon name="chevron-forward-sharp"></ion-icon></a>}
+                            {number < page.pages.length && <a className="right-link-full" href={`/page/${id}/${parseInt(number) + 1}?full=true`}><ion-icon name="chevron-forward-sharp"></ion-icon></a>}
                         </div>
                     }
                 </div>

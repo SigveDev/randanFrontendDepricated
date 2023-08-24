@@ -61,7 +61,7 @@ const Chapter = ({ chapters, user }) => {
         <div className="chapter">
             {chapter &&
             <div className="chapter-content">
-                <a className="left" href={"http://localhost:3000/page/" + id + "/0"}>
+                <a className="left" href={"/page/" + id + "/0"}>
                     <img src={`https://comic-api.sigve.dev/uploads/${chapter.image}`} alt="" />
                 </a>
                 <div className="right">
@@ -80,7 +80,7 @@ const Chapter = ({ chapters, user }) => {
                 <h2>Pages</h2>
                 <div className="pages-content">
                     {chapter.pages.map((page, i) => (
-                        <a href={`http://localhost:3000/page/${chapter._id}/${i + 1}?full=false`} key={i}>
+                        <a href={`/page/${chapter._id}/${i + 1}?full=false`} key={i}>
                             <img src={"https://comic-api.sigve.dev/uploads/" + page.image} alt={"page " + i} className="pageImg" />
                             <p>Page {i + 1}</p>
                         </a>
