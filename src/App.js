@@ -23,7 +23,7 @@ function App() {
   useEffect(() => {
     const getChapters = async () => {
       try {
-        const res = await axios.get('https://comic.api.sigve.dev/chapter/findall');
+        const res = await axios.get('https://comic-api.sigve.dev/chapter/findall');
         setChapters(res.data);
         if(chapters.length === 0) {
           localStorage.setItem('chapters', JSON.stringify(res.data));
@@ -44,7 +44,7 @@ function App() {
 
   useEffect(() => {
     const checkUser = async () => {
-      const response = await axios.get('https://comic.api.sigve.dev/auth', {
+      const response = await axios.get('https://comic-api.sigve.dev/auth', {
         headers: {
           Authorization: JSON.parse(localStorage.getItem('user'))
         }
@@ -70,7 +70,7 @@ function App() {
   useEffect(() => {
     const getLikes = async () => {
       try {
-        const res = await axios.get('https://comic.api.sigve.dev/liked/likes/' + user._id, {}, { withCredentials: true });
+        const res = await axios.get('https://comic-api.sigve.dev/liked/likes/' + user._id, {}, { withCredentials: true });
         setLikes(res.data);
         localStorage.setItem('likes', JSON.stringify(res.data));
       } catch (err) {

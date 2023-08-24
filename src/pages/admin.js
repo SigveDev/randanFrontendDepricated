@@ -12,7 +12,7 @@ const Admin = ({ user }) => {
     useEffect(() => {
         const getChapters = async () => {
             try {
-                const res = await axios.get("https://comic.api.sigve.dev/chapter/findmine/" + user._id);
+                const res = await axios.get("https://comic-api.sigve.dev/chapter/findmine/" + user._id);
                 setChapters(res.data);
             } catch (err) {
                 console.log(err);

@@ -9,7 +9,7 @@ const Login = ({ user }) => {
         try {
             const username = document.getElementById('usern').value;
             const password = document.getElementById('pass').value;
-            const response = await axios.post('https://comic.api.sigve.dev/user/login', {}, {
+            const response = await axios.post('https://comic-api.sigve.dev/user/login', {}, {
                 withCredentials: true,
                 headers: {
                     username: username,

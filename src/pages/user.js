@@ -14,7 +14,7 @@ const User = ({ user, chapters, likes }) => {
             if(temp === undefined) {
                 setReading(null);
 
-                const res = await axios.delete("https://comic.api.sigve.dev/liked/reading/" + user._id, {
+                const res = await axios.delete("https://comic-api.sigve.dev/liked/reading/" + user._id, {
                     id: likes.reading[0].id
                 }, { withCredentials: true });
                 if(res.status === 200) {
@@ -57,7 +57,7 @@ const User = ({ user, chapters, likes }) => {
                 if(liked.liked.length !== 0) {
                     liked.liked.forEach(like => {
                         if(chapters.find(chapter => chapter._id === like) === undefined) {
-                            const res = axios.put("https://comic.api.sigve.dev/liked/like/" + user._id, {
+                            const res = axios.put("https://comic-api.sigve.dev/liked/like/" + user._id, {
                                 id: like
                             }, { withCredentials: true });
                             if(res.status === 200) {
@@ -69,7 +69,7 @@ const User = ({ user, chapters, likes }) => {
                 if(liked.history.length !== 0) {
                     liked.history.forEach(history => {
                         if(chapters.find(chapter => chapter._id === history) === undefined) {
-                            const res = axios.put("https://comic.api.sigve.dev/liked/history/" + user._id, {
+                            const res = axios.put("https://comic-api.sigve.dev/liked/history/" + user._id, {
                                 id: history
                             }, { withCredentials: true });
                             if(res.status === 200) {

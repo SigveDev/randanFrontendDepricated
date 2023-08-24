@@ -22,7 +22,7 @@ const Chapter = ({ chapters, user }) => {
             setChapter(chapter);
             if(!pageAccessedByReload) {
                 setTimeout(() => {
-                    axios.put("https://comic.api.sigve.dev/vidstats/update/views/" + id, {});
+                    axios.put("https://comic-api.sigve.dev/vidstats/update/views/" + id, {});
                 }, 5000);
             }
         }
@@ -32,16 +32,16 @@ const Chapter = ({ chapters, user }) => {
     const like = async () => {
         const url = window.location.pathname.split("/");
         const id = url[url.length - 1];
-        const res = await axios.post("https://comic.api.sigve.dev/liked/like/" + id, {
+        const res = await axios.post("https://comic-api.sigve.dev/liked/like/" + id, {
             userId: user._id
         }, { withCredentials: true });
         if(res.status === 200) {
             localStorage.setItem('likes', JSON.stringify(res.data));
             setLiked(res.data);
             if(likeButton === false) {
-                await axios.put('https://comic.api.sigve.dev/vidstats/update/likes/add/' + id, {});
+                await axios.put('https://comic-api.sigve.dev/vidstats/update/likes/add/' + id, {});
             } else if(likeButton === true) {
-                await axios.put('https://comic.api.sigve.dev/vidstats/update/likes/remove/' + id, {});
+                await axios.put('https://comic-api.sigve.dev/vidstats/update/likes/remove/' + id, {});
             }
         }
     }
@@ -62,7 +62,7 @@ const Chapter = ({ chapters, user }) => {
             {chapter &&
             <div className="chapter-content">
                 <a className="left" href={"http://localhost:3000/page/" + id + "/0"}>
-                    <img src={`https://comic.api.sigve.dev/uploads/${chapter.image}`} alt="" />
+                    <img src={`https://comic-api.sigve.dev/uploads/${chapter.image}`} alt="" />
                 </a>
                 <div className="right">
                     <h1>{chapter.title}</h1>
@@ -81,7 +81,7 @@ const Chapter = ({ chapters, user }) => {
                 <div className="pages-content">
                     {chapter.pages.map((page, i) => (
                         <a href={`http://localhost:3000/page/${chapter._id}/${i + 1}?full=false`} key={i}>
-                            <img src={"https://comic.api.sigve.dev/uploads/" + page.image} alt={"page " + i} className="pageImg" />
+                            <img src={"https://comic-api.sigve.dev/uploads/" + page.image} alt={"page " + i} className="pageImg" />
                             <p>Page {i + 1}</p>
                         </a>
                     ))}

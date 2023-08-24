@@ -39,7 +39,7 @@ const Edit = ({ user, chapter }) => {
                 const data = new FormData();
                 data.append("image", files[i]);
                 const res = await axios.post(
-                    "https://comic.api.sigve.dev/upload",
+                    "https://comic-api.sigve.dev/upload",
                     data
                 );
                 tempPages.push({
@@ -48,7 +48,7 @@ const Edit = ({ user, chapter }) => {
                 });
             }
             for(let i = 0; i < chapter.pages.length; i++) {
-                axios.delete("https://comic.api.sigve.dev/upload/delete/" + chapter.pages[i].image);
+                axios.delete("https://comic-api.sigve.dev/upload/delete/" + chapter.pages[i].image);
             }
         } else {
             tempPages = chapter.pages;
@@ -66,17 +66,17 @@ const Edit = ({ user, chapter }) => {
             const data = new FormData();
             data.append("image", file);
             const res = await axios.post(
-                "https://comic.api.sigve.dev/upload",
+                "https://comic-api.sigve.dev/upload",
                 data
             );
             newChapter.image = res.data.file;
 
-            axios.delete("https://comic.api.sigve.dev/upload/delete/" + chapter.image);
+            axios.delete("https://comic-api.sigve.dev/upload/delete/" + chapter.image);
         } else {
             newChapter.image = chapter.image;
         }
         try {
-            await axios.put("https://comic.api.sigve.dev/chapter/update/" + chapter._id, newChapter);
+            await axios.put("https://comic-api.sigve.dev/chapter/update/" + chapter._id, newChapter);
             window.location.replace("/admin?page=my");
         }
         catch (err) {
@@ -91,7 +91,7 @@ const Edit = ({ user, chapter }) => {
                 <input type="text" className="title" placeholder="Title" defaultValue={chapter.title} />
                 <div className="left">
                     <input type="file" className="frontUpload" onChange={handleFileChange} accept="image/png, image/jpg, image/jpeg, image/gif" />
-                    {imageUrl ? <img src={imageUrl} alt="Uploaded file" className="uploadedImg" onClick={handleClick} /> : <img src={"https://comic.api.sigve.dev/uploads/" + chapter.image} alt="Please upload" className="uploadedImg" onClick={handleClick} />}
+                    {imageUrl ? <img src={imageUrl} alt="Uploaded file" className="uploadedImg" onClick={handleClick} /> : <img src={"https://comic-api.sigve.dev/uploads/" + chapter.image} alt="Please upload" className="uploadedImg" onClick={handleClick} />}
                 </div>
                 <div className="right">
                     <input type="text" className="author" placeholder="Author" defaultValue={chapter.author}/>
@@ -107,7 +107,7 @@ const Edit = ({ user, chapter }) => {
                 <div className="pages-grid">
                     {imagesUrl.length === 0 ? chapter.pages.map((page, i) => (
                         <div key={i}>
-                            <img src={"https://comic.api.sigve.dev/uploads/" + page.image} alt={"page " + i} className="uploadedPage" />
+                            <img src={"https://comic-api.sigve.dev/uploads/" + page.image} alt={"page " + i} className="uploadedPage" />
                             <p>Page {i + 1}</p>
                         </div>
                     )) : 
@@ -122,7 +122,7 @@ const Edit = ({ user, chapter }) => {
                 <div className="submit">
                     <input type="button" value="Delete" onClick={() => {
                         if (window.confirm("Are you sure you want to delete this chapter?")) {
-                            axios.delete("https://comic.api.sigve.dev/chapter/delete/" + chapter._id, {data: {userId: user._id}, withCredentials: true});
+                            axios.delete("https://comic-api.sigve.dev/chapter/delete/" + chapter._id, {data: {userId: user._id}, withCredentials: true});
                             window.location.replace("/admin?page=my");
                         }
                     }} />

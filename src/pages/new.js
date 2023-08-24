@@ -41,7 +41,7 @@ const New = ({ user }) => {
                 const data = new FormData();
                 data.append("image", files[i]);
                 const res = await axios.post(
-                    "https://comic.api.sigve.dev/upload",
+                    "https://comic-api.sigve.dev/upload",
                     data
                 );
                 tempPages.push({
@@ -62,12 +62,12 @@ const New = ({ user }) => {
         const data = new FormData();
         data.append("image", file);
         const res = await axios.post(
-            "https://comic.api.sigve.dev/upload",
+            "https://comic-api.sigve.dev/upload",
             data
         );
         newChapter.image = res.data.file;
         try {
-            await axios.post("https://comic.api.sigve.dev/chapter/new", newChapter);
+            await axios.post("https://comic-api.sigve.dev/chapter/new", newChapter);
             window.location.replace("/admin?page=my");
         }
         catch (err) {
