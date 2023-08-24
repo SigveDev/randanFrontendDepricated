@@ -1,7 +1,7 @@
 const ChapterHorizontal = ({ chapter }) => {
     return (
         <a className="chapter-small-hoz" href={`http://localhost:3000/chapter/${chapter._id}`}>
-            <img src={"https://node.binders.net:8123/uploads/" + chapter.image} alt={chapter.title} />
+            <img src={"https://comic.api.sigve.dev/uploads/" + chapter.image} alt={chapter.title} />
             <div className="info">
                 <h2 className="chapter-small-hoz__title">{chapter.title}</h2>
                 <p className="chapter-small-hoz__author">By {chapter.author}</p>

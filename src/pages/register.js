@@ -9,7 +9,7 @@ const Register = ({ user }) => {
         try {
             const username = document.getElementById('usern').value;
             const password = document.getElementById('pass').value;
-            const response = await axios.post('https://node.binders.net:8123/user/register', {}, {
+            const response = await axios.post('https://comic.api.sigve.dev/user/register', {}, {
                 withCredentials: true,
                 headers: {
                     username: username,
