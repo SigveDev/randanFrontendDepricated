@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { HeadProvider, Title, Meta } from 'react-head';
 
 import Header from './components/header';
 
@@ -90,6 +91,12 @@ function App() {
 
   return (
     <BrowserRouter>
+      <HeadProvider>
+        <Title>A-Corp Comic</Title>
+        <Meta name="description" content="A-Corp Comic" />
+        <Meta name="og:title" content="A-Corp Comic" />
+        <Meta name="og:description" content="A-Corp Comic" />
+        <Meta name="og:image" content="" />
       <div className="App">
         <Header user={user} />
         <Routes>
@@ -104,6 +111,7 @@ function App() {
           <Route path="/user" element={<User user={user} chapters={chapters} likes={likes} />} />
         </Routes>
       </div>
+      </HeadProvider>
     </BrowserRouter>
   );
 }
