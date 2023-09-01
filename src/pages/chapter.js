@@ -60,6 +60,11 @@ const Chapter = ({ chapters, user }) => {
 
     return (
         <HeadProvider>
+        <Title>{chapter ? chapter.title : "Loading..."}</Title>
+        <Meta name="description" content={chapter ? chapter.description : "Loading..."} />
+        <Meta property="og:title" content={chapter ? chapter.title : "Loading..."} />
+        <Meta property="og:description" content={chapter ? chapter.description : "Loading..."} />
+        <Meta property="og:image" content={chapter ? "https://comic-api.sigve.dev/uploads/" + chapter.image : "Loading..."} />
         <div className="chapter">
             {chapter &&
             <div className="chapter-content">
@@ -91,11 +96,6 @@ const Chapter = ({ chapters, user }) => {
             </div>
             }
         </div>
-        <Title>{chapter ? chapter.title : "Loading..."}</Title>
-        <Meta name="description" content={chapter ? chapter.description : "Loading..."} />
-        <Meta property="og:title" content={chapter ? chapter.title : "Loading..."} />
-        <Meta property="og:description" content={chapter ? chapter.description : "Loading..."} />
-        <Meta property="og:image" content={chapter ? "https://comic-api.sigve.dev/uploads/" + chapter.image : "Loading..."} />
         </HeadProvider>
     )
 }
