@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { HeadProvider, Title, Meta } from 'react-head';
 
 const Chapter = ({ chapters, user }) => {
     const [chapter, setChapter] = useState(null);
@@ -58,6 +59,7 @@ const Chapter = ({ chapters, user }) => {
     }, [liked, id]);
 
     return (
+        <HeadProvider>
         <div className="chapter">
             {chapter &&
             <div className="chapter-content">
@@ -89,6 +91,12 @@ const Chapter = ({ chapters, user }) => {
             </div>
             }
         </div>
+        <Title>{chapter ? chapter.title : "Loading..."}</Title>
+        <Meta name="description" content={chapter ? chapter.description : "Loading..."} />
+        <Meta property="og:title" content={chapter ? chapter.title : "Loading..."} />
+        <Meta property="og:description" content={chapter ? chapter.description : "Loading..."} />
+        <Meta property="og:image" content={chapter ? "https://comic-api.sigve.dev/uploads/" + chapter.image : "Loading..."} />
+        </HeadProvider>
     )
 }
 
