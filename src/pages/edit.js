@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { HeadProvider, Title } from 'react-head';
 
 const Edit = ({ user, chapter }) => {
     const [file, setFile] = useState(null);
@@ -85,6 +86,8 @@ const Edit = ({ user, chapter }) => {
     }
 
     return (
+        <HeadProvider>
+        <Title>Edit Chapter</Title>
         <div className="edit">
             <h2>Edit Chapter</h2>
             {chapter && <form onSubmit={handleSubmit} className="edit-form">
@@ -130,6 +133,7 @@ const Edit = ({ user, chapter }) => {
                 </div>
             </form>}
         </div>
+        </HeadProvider>
     )
 }
 

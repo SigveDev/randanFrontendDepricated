@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { HeadProvider, Title } from 'react-head';
 
 const Stats = ({ user }) => {
     const [chapters, setChapters] = useState([]);
@@ -40,6 +41,8 @@ const Stats = ({ user }) => {
     }, [stats, viewsCalcRun]);
 
     return (
+        <HeadProvider>
+        <Title>Analytics</Title>
         <div className="stats">
             <h2>Analytics</h2>
             {chapters && stats && views ? <div className="stats-content">
@@ -61,6 +64,7 @@ const Stats = ({ user }) => {
                 {(!stats && chapters) || (stats && !chapters) ? <p>Loading...</p> : <p>No chapters yet!</p>}
             </div>}
         </div>
+        </HeadProvider>
     );
 }
 

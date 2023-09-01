@@ -1,5 +1,6 @@
 import ChapterHorizontal from "../components/chapter-horizontal";
 import ChapterSmall from "../components/chapter-small";
+import { HeadProvider, Title } from 'react-head';
 
 import { useState } from "react";
 
@@ -11,6 +12,8 @@ const Home = ({ chapters }) => {
     }
 
     return (
+        <HeadProvider>
+        <Title>A-Corp Comic - Home</Title>
         <div className="home">
             {chapters.length > 0 ?
             <div className="home-content">
@@ -44,6 +47,7 @@ const Home = ({ chapters }) => {
             </div>
             : <h2>No chapters found...</h2>}
         </div>
+        </HeadProvider>
     )
 }
 

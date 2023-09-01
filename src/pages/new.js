@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { HeadProvider, Title } from 'react-head';
 
 import tempImage from "../images/please-upload.png";
 
@@ -76,6 +77,8 @@ const New = ({ user }) => {
     }
 
     return (
+        <HeadProvider>
+        <Title>New Chapter</Title>
         <div className="new">
             <h2>New Chapter</h2>
             <form onSubmit={handleSubmit} className="new-form">
@@ -108,6 +111,7 @@ const New = ({ user }) => {
                 </div>
             </form>
         </div>
+        </HeadProvider>
     )
 }
 

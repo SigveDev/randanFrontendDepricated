@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { HeadProvider, Title, Meta } from 'react-head';
 
 const Page = ({ chapters, likes, user }) => {
     const [page, setPage] = useState(null);
@@ -120,6 +121,12 @@ const Page = ({ chapters, likes, user }) => {
     }, [number, page, id, user]);
 
     return (
+        <HeadProvider>
+        <Title>{number ? number : "Loading..."}</Title>
+        <Meta name="description" content={page ? page.description : "Loading..."} />
+        <Meta property="og:title" content={page ? page.title : "Loading..."} />
+        <Meta property="og:description" content={page ? page.description : "Loading..."} />
+        <Meta property="og:image" content={page ? "https://comic-api.sigve.dev/uploads/" + page.image : "Loading..."} />
         <div className="page">
             <div className="page-viewer">
                 {page && <div className="page-ui"><a href={`/chapter/${page._id}`}><ion-icon name="chevron-back-sharp"></ion-icon>Back</a></div>}
@@ -168,6 +175,7 @@ const Page = ({ chapters, likes, user }) => {
                 </div>
             }
         </div>
+        </HeadProvider>
     )
 }
 

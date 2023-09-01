@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import ChapterSmall from '../components/chapter-small';
 import axios from 'axios';
+import { HeadProvider, Title } from 'react-head';
 
 const User = ({ user, chapters, likes }) => {
     const [reading, setReading] = useState(null);
@@ -99,6 +100,8 @@ const User = ({ user, chapters, likes }) => {
     }
 
     return (
+        <HeadProvider>
+        <Title>User {user ? user.username : "Loading..."}</Title>
         <div className="user">
             <div className="user-content">
                 <div className="current">
@@ -137,6 +140,7 @@ const User = ({ user, chapters, likes }) => {
                 </div>
             </div>
         </div>
+        </HeadProvider>
     );
 };
 

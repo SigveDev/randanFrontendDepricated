@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { HeadProvider, Title } from 'react-head';
 
 import ChapterSmallAd from "../components/chapter-small-admin";
 import New from "./new";
@@ -100,6 +101,8 @@ const Admin = ({ user }) => {
     }, [user]);
 
     return (
+        <HeadProvider>
+        <Title>Admin Panel</Title>
         <div className="admin">
             <div className="admin-menu">
                 <a className="ana" href="/admin">Analytics</a>
@@ -117,6 +120,7 @@ const Admin = ({ user }) => {
                 {renderSwitch(new URLSearchParams(window.location.search).get('page'))}
             </div>
         </div>
+        </HeadProvider>
     )
 }
 

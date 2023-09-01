@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { HeadProvider, Title } from 'react-head';
 
 const Login = ({ user }) => {
     const [status, setStatus] = useState(true);
@@ -44,6 +45,8 @@ const Login = ({ user }) => {
     }, [user]);
 
     return (
+        <HeadProvider>
+        <Title>Login</Title>
         <div className="login">
             <form className="login-form" onSubmit={login}>
                 <h2>Login</h2>
@@ -54,6 +57,7 @@ const Login = ({ user }) => {
                 <button type="submit">Login</button>
             </form>
         </div>
+        </HeadProvider>
     );
 }
 
